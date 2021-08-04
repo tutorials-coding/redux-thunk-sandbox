@@ -1,7 +1,9 @@
+import { useSelector } from 'react-redux'
+
 import Alert from 'react-bootstrap/Alert'
 
 export const Notifications = () => {
-  const notifications = []
+  const notifications = useSelector((state) => state.app.notifications)
   return (
     <div>
       {notifications.map((n) => (
