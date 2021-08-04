@@ -28,7 +28,7 @@ const mockUsers = [
 export const getUser = (userId) => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve(mockUsers.filter((user) => user.id === userId))
+      resolve(mockUsers.find((user) => user.id === userId))
     }, 500)
   })
 }
