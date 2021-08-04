@@ -1,4 +1,8 @@
-import { SHOW_NOTIFICATION, HIDE_NOTIFICATION } from './actions'
+import {
+  SHOW_NOTIFICATION,
+  HIDE_NOTIFICATION,
+  SET_NOTIFICATIONS_ENABLED,
+} from './actions'
 
 // type values 'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'
 const showNotification = ({ id, title, text, type }) => {
@@ -36,12 +40,30 @@ export const showNotificationWithTimeout = (options) => {
   // improvement - move id provider to options - for tests
   const idProvider = options.idProvider || defaultNotificationIdProvider
 
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const { notificationsEnabled } = getState().app
+    if (!notificationsEnabled) {
+      return
+    }
+
     const id = idProvider()
     dispatch(showNotification({ id, title, text, type }))
 
     setTimeout(() => {
       dispatch(hideNotification(id))
     }, timeoutMs)
+  }
+}
+
+export const toggleNotification = () => {
+  return (dispatch, getState) => {
+    const { notificationsEnabled } = getState().app
+
+    dispatch({
+      type: SET_NOTIFICATIONS_ENABLED,
+      payload: {
+        status: !notificationsEnabled,
+      },
+    })
   }
 }

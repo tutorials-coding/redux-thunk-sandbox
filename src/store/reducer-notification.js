@@ -1,4 +1,8 @@
-import { SHOW_NOTIFICATION, HIDE_NOTIFICATION } from './actions'
+import {
+  SHOW_NOTIFICATION,
+  HIDE_NOTIFICATION,
+  SET_NOTIFICATIONS_ENABLED,
+} from './actions'
 
 const initState = {
   // improvement - enable and check it in thunk
@@ -28,6 +32,13 @@ export const reducerNotification = (state = initState, action) => {
       return {
         ...state,
         notifications: state.notifications.filter((n) => n.id !== id),
+      }
+    }
+    case SET_NOTIFICATIONS_ENABLED: {
+      const notificationsEnabled = action.payload.status
+      return {
+        ...state,
+        notificationsEnabled,
       }
     }
     default:
