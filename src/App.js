@@ -7,7 +7,10 @@ import './App.css'
 import Button from 'react-bootstrap/Button'
 
 import { getUserAggregatedData } from './store/thunks'
-import { showNotificationWithTimeout } from './store/thunks-notification'
+import {
+  showNotificationWithTimeout,
+  toggleNotification,
+} from './store/thunks-notification'
 import { Notifications } from './components/notifications/Notifications'
 
 function App() {
@@ -21,6 +24,9 @@ function App() {
     })
   }
 
+  const handleToggleNotificationsClick = () => {
+    dispatch(toggleNotification())
+  }
   const handleSendSuccessNotificationClick = () => {
     dispatch(
       showNotificationWithTimeout({
@@ -57,6 +63,9 @@ function App() {
 
       <hr />
       <div className="buttons-container">
+        <Button onClick={handleToggleNotificationsClick}>
+          Toggle Notification
+        </Button>
         <Button onClick={handleSendSuccessNotificationClick}>
           Send Success Notification
         </Button>
