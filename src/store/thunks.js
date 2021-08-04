@@ -1,5 +1,3 @@
-import * as userApi from '../api/user'
-import * as notesApi from '../api/notes'
 import { LOG_ERROR, SAVE_USER, SAVE_USER_NOTES } from './actions'
 
 const logError = (data) => {
@@ -17,8 +15,9 @@ const saveUser = (data) => {
 }
 
 export const getUser = (userId) => {
-  return (dispatch) => {
-    return userApi.getUser(userId).then(
+  return (dispatch, _, services) => {
+    console.log('v.', services.app.version)
+    return services.userApi.getUser(userId).then(
       (data) => dispatch(saveUser(data)),
       (error) => dispatch(logError(error))
     )
@@ -33,8 +32,8 @@ const saveUserNotes = (data) => {
 }
 
 export const getUserNotes = (userId) => {
-  return (dispatch) => {
-    return notesApi.getUserNotes(userId).then(
+  return (dispatch, _, services) => {
+    return services.notesApi.getUserNotes(userId).then(
       (data) => dispatch(saveUserNotes(data)),
       (error) => dispatch(logError(error))
     )

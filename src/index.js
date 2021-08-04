@@ -4,12 +4,28 @@ import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 
+import * as userApi from './api/user'
+import * as notesApi from './api/notes'
+
 import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { rootReducer } from './store/reducers'
 
-const store = createStore(rootReducer, applyMiddleware(thunk))
+const APP_VERSION = '1.0.0'
+
+const store = createStore(
+  rootReducer,
+  applyMiddleware(
+    thunk.withExtraArgument({
+      userApi,
+      notesApi,
+      app: {
+        version: APP_VERSION,
+      },
+    })
+  )
+)
 
 ReactDOM.render(
   <React.StrictMode>
