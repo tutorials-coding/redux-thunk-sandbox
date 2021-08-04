@@ -33,11 +33,10 @@ const defaultNotificationIdProvider = () => {
 }
 
 export const showNotificationWithTimeout = (options) => {
-  const timeoutMs = options.timeoutMs || 5000
+  const timeoutMs = options.timeoutMs || 3000
   const title = options.title || ''
   const text = options.text || ''
   const type = options.type || 'info'
-  // improvement - move id provider to options - for tests
   const idProvider = options.idProvider || defaultNotificationIdProvider
 
   return (dispatch, getState) => {
@@ -55,7 +54,7 @@ export const showNotificationWithTimeout = (options) => {
   }
 }
 
-export const toggleNotification = () => {
+export const toggleNotifications = () => {
   return (dispatch, getState) => {
     const { notificationsEnabled } = getState().app
 
