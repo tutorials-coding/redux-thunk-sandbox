@@ -7,6 +7,7 @@ import './App.css'
 import Button from 'react-bootstrap/Button'
 
 import { getUserAggregatedData } from './store/thunks'
+import { Notifications } from './components/notifications/Notifications'
 
 function App() {
   const dispatch = useDispatch()
@@ -24,6 +25,7 @@ function App() {
       <Button onClick={getUserData}>Get User Data</Button>
 
       <pre>{JSON.stringify(userData, null, 2)}</pre>
+      <Notifications />
     </div>
   )
 }
